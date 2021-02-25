@@ -1,0 +1,9 @@
+/* Navbar */
+
+.navbar {
+    background-color: red; 
+}
+
+.navbar-brand, .nav-item {
+    padding: 6px 18px 6px 18px;
+}
