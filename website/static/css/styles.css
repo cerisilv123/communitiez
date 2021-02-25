@@ -1,9 +1,43 @@
+/* Main Components */
+
+body {
+    background-color: #FDFDFD;
+}
+
+h1 {
+    font-size: 3.5rem;
+}
+
+.container-fluid {
+    width: 85%;
+}
+
 /* Navbar */
 
 .navbar {
-    background-color: red; 
+    background-color: #30E3CA; 
 }
 
 .navbar-brand, .nav-item {
-    padding: 6px 18px 6px 18px;
+    padding: 6px 25px 6px 25px; 
+}
+
+/* Landing Area */
+
+.robot-image {
+    width: 400px;
+    margin-top: 130px;
+}
+
+.home-page-cta {
+    margin-top: 160px;
+}
+
+.sub-heading-cta {
+    margin: 20px 0px 20px 0px;
+}
+
+.home-button {
+    background-color: #30E3CA;
+    margin-top: 15px;
 }
