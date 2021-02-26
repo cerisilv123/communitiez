@@ -4,6 +4,47 @@
 
 {% block content %}
 
-<h1>This is the Sign Up page</h1>
+<!-- Navigation Bar -->
+
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="{{ url_for('view.home') }}">Communitiez</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item nav-item-homepage">
+          <a class="nav-link" href="{{ url_for('auth.login') }}">Log In</a>
+        </li>
+        <li class="nav-item active nav-item-homepage">
+          <a class="nav-link" href="#">Sign Up</a>
+        </li>
+      </ul>
+    </div>
+</nav>
+
+<!-- Log In form -->
+<div class="container-fluid container-form">
+    <form>
+        <h4 class="form-heading">Sign Up</h4>
+        <div class="form-group">
+            <label for="emailInput">Email:</label>
+            <input type="email" class="form-control" id="emailInput">
+        </div>
+        <div class="form-group">
+            <label for="usernameInput">Username:</label>
+            <input type="text" class="form-control" id="usernameInput">
+        </div>
+        <div class="form-group">
+            <label for="passwordInput1">Password:</label>
+            <input type="password" class="form-control" id="passwordInput1">
+        </div>
+        <div class="form-group">
+            <label for="passwordInput2">Confirm Password:</label>
+            <input type="password" class="form-control" id="passwordInput2">
+        </div>
+            <button type="submit" class="btn btn-light btn-authentication">Log In</button>
+    </form>
+</div>
 
 {% endblock %}
