@@ -2,7 +2,7 @@
 
 {% block title %}Home{% endblock %}
 
-{% block content %}
+{% block navbar %}
 
 <!-- Navigation Bar -->
 
@@ -22,19 +22,23 @@
       </ul>
     </div>
   </nav>
+
+  {% endblock %}
+
+  {% block content %}
   
   <!-- Home Page Content Area -->
 
     <div class="container-fluid home-content-area">
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-8">
             <div class="home-page-cta">
               <h1 class="heading-cta">Feel part of a community at the click of a button.</h1>
               <h4 class="sub-heading-cta">The number one online community platform</h4>
-              <button type="button" class="btn btn-light btn-lg home-button">Sign Up</button>
+              <a href="{{ url_for('auth.signup') }}" class="btn btn-light btn-lg home-button" role="button">Sign Up</a>
             </div>
           </div>
-          <div class="col-lg-6 robot-col">
+          <div class="col-lg-4 robot-col">
               <img class="robot-image" src="{{ url_for('static', filename='images/robot.svg') }}" alt="Image of a robot">
           </div>
         </div>

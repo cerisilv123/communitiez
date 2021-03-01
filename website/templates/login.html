@@ -2,7 +2,7 @@
 
 {% block title %}Login{% endblock %}
 
-{% block content %}
+{% block navbar %}
 
 <!-- Navigation Bar -->
 
@@ -23,19 +23,23 @@
     </div>
 </nav>
 
+{% endblock %}
+
+{% block content %}
+
 <!-- Log In form -->
 <div class="container-fluid container-form">
-    <form>
+    <form action="#" method="post">
         <h4 class="form-heading">Log In</h4>
         <div class="form-group">
             <label for="usernameInput">Username:</label>
-            <input type="text" class="form-control" id="usernameInput">
+            <input type="text" class="form-control" id="usernameInput" name="usernameInput" placeholder="Enter Username">
         </div>
         <div class="form-group">
             <label for="passwordInput">Password:</label>
-            <input type="password" class="form-control" id="passwordInput">
+            <input type="password" class="form-control" id="passwordInput" name="passwordInput" placeholder="Enter Password">
         </div>
-            <button type="submit" class="btn btn-light btn-authentication">Log In</button>
+            <button type="submit" class="btn btn-light btn-authentication" value="login">Log In</button>
     </form>
 </div>
 
