@@ -1,4 +1,7 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash, session
+from werkzeug.security import generate_password_hash, check_password_hash
+from .models import User
+from . import db
 
 auth = Blueprint('auth', __name__)
 
@@ -8,6 +11,15 @@ def login():
 
 @auth.route('/signup', methods=["POST", "GET"])
 def signup():
+    """ this function creates the route for the user 
+    to register an account Communitiez. The function 
+    checks if data entered meets the minimum requirements
+    and queries the database to see if no other users exist 
+    with the same details. If all criteria is met 
+    the users details are added to the DB and a session
+    is created storing the users username. 
+    """
+
     if request.method == "POST":
         signup_email = request.form["emailInput"]
         signup_username = request.form["usernameInput"]
@@ -23,8 +35,19 @@ def signup():
         elif signup_password1 != signup_password2:
             flash("Passwords do not match", category="error")
         else:
-            print("#Write Code functionality to add details to the database here")
+            email_exists = User.query.filter_by(email=signup_email).first()
+            username_exists = User.query.filter_by(username=signup_username).first()
 
-        return redirect(url_for("auth.signup"))
+            if email_exists is not None or username_exists is not None:
+                flash("The email or username already exists, please try again with different ones", category="error")
+                return redirect(url_for("auth.signup"))
+            else:
+                new_user = User(email=signup_email, username=signup_username, password=generate_password_hash(signup_password1, method="sha256"))
+                db.session.add(new_user)
+                db.session.commit()
+                session["user"] = signup_username
+                flash(f"Account Created Successfully - welcome to Communitiez {signup_username}", category="success")
+                return redirect(url_for("view.home"))
+
     else: 
         return render_template("signup.html")
