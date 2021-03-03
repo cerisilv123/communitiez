@@ -7,7 +7,24 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=["POST", "GET"])
 def login():
-    return render_template('login.html')
+    """ this function creates the route for the user 
+    to login to an account on Communitiez. 
+    """
+
+    if request.method == "POST":
+        login_username = request.form["usernameInput"]
+        login_password = request.form["passwordInput"]
+        user_account = User.query.filter_by(username=login_username).first()
+
+        if user_account is not None: 
+            if check_password_hash(user_account.password, login_password):
+            # Finish this code - watch tech with tim tutorial
+    else: 
+        if "user" in session:
+            flash("You are already logged in", category="error")
+            return redirect(url_for("view.home"))
+        else: 
+            return render_template("login.html")
 
 @auth.route('/signup', methods=["POST", "GET"])
 def signup():
@@ -19,7 +36,7 @@ def signup():
     the users details are added to the DB and a session
     is created storing the users username. 
     """
-
+  
     if request.method == "POST":
         signup_email = request.form["emailInput"]
         signup_username = request.form["usernameInput"]
@@ -48,6 +65,9 @@ def signup():
                 session["user"] = signup_username
                 flash(f"Account Created Successfully - welcome to Communitiez {signup_username}", category="success")
                 return redirect(url_for("view.home"))
-
     else: 
-        return render_template("signup.html")
+        if "user" in session:
+            flash(f"You are already signed up and logged in. Please log out to create another account, {session['user']}", category="error")
+            return redirect(url_for("view.home"))
+        else:
+            return render_template("signup.html") 
