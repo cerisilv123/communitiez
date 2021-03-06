@@ -1,7 +1,14 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, flash, url_for, request
+from flask_login import login_required, current_user
+from .models import User
 
 view = Blueprint('view', __name__)
 
 @view.route('/')
-def home():
+def landing():
     return render_template('index.html')
+
+@view.route('/home')
+@login_required
+def home():
+    return render_template('home.html')

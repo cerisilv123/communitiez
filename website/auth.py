@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import login_user, login_required, logout_user, current_user
 from .models import User
 from . import db
 
@@ -8,23 +9,36 @@ auth = Blueprint('auth', __name__)
 @auth.route('/login', methods=["POST", "GET"])
 def login():
     """ this function creates the route for the user 
-    to login to an account on Communitiez. 
+    to login to an account on Communitiez. It checks 
+    to see if the details entered match in the database
+    and uses the werkzeug.security library to check 
+    compare the hashed pw. 
     """
 
     if request.method == "POST":
         login_username = request.form["usernameInput"]
         login_password = request.form["passwordInput"]
-        user_account = User.query.filter_by(username=login_username).first()
+        username_exists = User.query.filter_by(username=login_username).first()
 
-        if user_account is not None: 
-            if check_password_hash(user_account.password, login_password):
-            # Finish this code - watch tech with tim tutorial
+        if username_exists is not None: 
+            if check_password_hash(username_exists.password, login_password):
+                flash("Logged in Successfully!", category="success")
+                login_user(username_exists, remember=True)
+                return redirect(url_for("view.home"))
+            else: 
+                flash("Incorrect Password, please try again!", category="error")
+        else: 
+            flash("Email does not exist", category="error")
+        
+        return redirect(url_for("auth.login"))
+
     else: 
-        if "user" in session:
-            flash("You are already logged in", category="error")
+        if current_user.is_authenticated:
+            flash("You are already logged in!", category="error")
             return redirect(url_for("view.home"))
         else: 
             return render_template("login.html")
+
 
 @auth.route('/signup', methods=["POST", "GET"])
 def signup():
@@ -33,8 +47,7 @@ def signup():
     checks if data entered meets the minimum requirements
     and queries the database to see if no other users exist 
     with the same details. If all criteria is met 
-    the users details are added to the DB and a session
-    is created storing the users username. 
+    the users details are added to the DB.
     """
   
     if request.method == "POST":
@@ -57,17 +70,26 @@ def signup():
 
             if email_exists is not None or username_exists is not None:
                 flash("The email or username already exists, please try again with different ones", category="error")
-                return redirect(url_for("auth.signup"))
             else:
                 new_user = User(email=signup_email, username=signup_username, password=generate_password_hash(signup_password1, method="sha256"))
                 db.session.add(new_user)
                 db.session.commit()
-                session["user"] = signup_username
-                flash(f"Account Created Successfully - welcome to Communitiez {signup_username}", category="success")
-                return redirect(url_for("view.home"))
+                flash(f"Account Created Successfully - welcome to Communitiez {signup_username}. Please log in.",category="success")
+                return redirect(url_for("auth.login"))
+
+        return redirect(url_for("auth.signup"))
+
     else: 
-        if "user" in session:
-            flash(f"You are already signed up and logged in. Please log out to create another account, {session['user']}", category="error")
+        if current_user.is_authenticated:
+            flash("You are already logged in. Log out to create another account.", category="error")
             return redirect(url_for("view.home"))
-        else:
+        else: 
             return render_template("signup.html") 
+
+
+@auth.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash("You have been logged out successfully!", category="success")
+    return(redirect(url_for("auth.login")))
