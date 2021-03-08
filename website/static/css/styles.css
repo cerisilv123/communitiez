@@ -78,3 +78,27 @@ h1 {
     background-color: #30E3CA;
     margin-top: 10px;
 }
+
+/* Home Page */
+
+.home-heading {
+    margin-top: 50px;
+}
+
+.home-post {
+    margin-top: 5px;
+}
+
+.home-categories {
+    margin-top: 5px;
+}
+
+.home-post, .home-categories {
+    background-color: white;
+    border: 0.5px solid #30E3CA;
+    border-radius: 5px;
+}
+
+.home-post-content, .home-categories-content {
+    padding: 10px 15px 2.5px 15px;
+}
