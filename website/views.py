@@ -12,3 +12,13 @@ def landing():
 @login_required
 def home():
     return render_template('home.html')
+
+@view.route('/search_communitiez')
+@login_required
+def search_communitiez():
+    return render_template("search_communitiez.html")
+
+@view.route('create_community')
+@login_required
+def create_community():
+    return render_template("create_community.html")

@@ -79,13 +79,13 @@ h1 {
     margin-top: 10px;
 }
 
-/* Home Page */
+/* Home Page, Search Page, Create Page */
 
-.home-heading {
+.home-heading, .search-heading, .create-heading {
     margin-top: 50px;
 }
 
-.home-post {
+.home-post, .search-bar {
     margin-top: 5px;
 }
 
@@ -93,12 +93,32 @@ h1 {
     margin-top: 5px;
 }
 
-.home-post, .home-categories {
+.home-post, .home-categories, .search-bar, .create-form {
     background-color: white;
     border: 0.5px solid #30E3CA;
     border-radius: 5px;
 }
 
-.home-post-content, .home-categories-content {
+.home-post-content, .home-categories-content, .search-bar-content, .create-form-content {
     padding: 10px 15px 2.5px 15px;
+}
+
+/* search_comunitiez page */
+
+.search-bar-box, .search-bar-btn {
+    margin-top: 10px;
+}
+
+.btn-search {
+    background-color: #30E3CA;
+}
+
+/* create_community page */
+
+.create-form {
+    margin-top: 15px;
+}
+
+.create-form-dropdown {
+    width: 340px;
 }

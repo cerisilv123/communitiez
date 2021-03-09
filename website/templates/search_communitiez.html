@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Search Community{% endblock %}
 
 {% block navbar %}
 
@@ -14,10 +14,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item nav-item-homepage">
-          <a class="nav-link" href="{{ url_for('view.search_communitiez') }}">Search Communitiez</a>
+          <a class="nav-link" href="#">Search Communitiez</a>
         </li>
         <li class="nav-item nav-item-homepage">
-          <a class="nav-link" href="">Create Community</a>
+          <a class="nav-link" href="{{ url_for('view.create_community') }}">Create Community</a>
         </li>
         <li class="nav-item nav-item-homepage">
           <a class="nav-link" href="{{ url_for('auth.logout') }}">Log Out</a>
@@ -30,18 +30,27 @@
 
   {% block content %}
 
-<!-- Post Content --> 
+<!-- Search Content --> 
 
 <div class="container-fluid">
-  <h3 class="home-heading">POSTS ON COMMUNITIEZ</h3>
+  <h3 class="search-heading">SEARCH COMMUNITIEZ</h3>
   <div class="row">
     <div class="col-lg-10">
-      <div class="home-post">
-        <div class="home-post-content">
-          <h4>Topic Heading</h4> 
-          <h5>Group Name</h5>
-          <p>Posted by (username)</p>
-          <p>Number of comments</p>
+      <div class="search-bar">
+        <div class="search-bar-content">
+          <form action="#">
+              <div class="form-group">
+                <label for="searchCommunitiez">Search:</label>
+                <div class="row">
+                <div class="col-lg-10 search-bar-box">
+                  <input type="text" class="form-control" id="searchCommunitiez">
+                </div>
+                <div class="col-lg-2 search-bar-btn">
+                  <button type="submit" class="btn btn-light btn-search">Search</button>
+                </div>
+                </div>
+              </div>
+          </form>
         </div>
       </div>
     </div>

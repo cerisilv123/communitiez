@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Create Community{% endblock %}
+
+{% block navbar %}
+
+<!-- Navigation Bar -->
+
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">Communitiez</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item nav-item-homepage">
+          <a class="nav-link" href="{{ url_for('view.search_communitiez') }}">Search Communitiez</a>
+        </li>
+        <li class="nav-item nav-item-homepage">
+          <a class="nav-link" href="#">Create Community</a>
+        </li>
+        <li class="nav-item nav-item-homepage">
+          <a class="nav-link" href="{{ url_for('auth.logout') }}">Log Out</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+{% endblock %}
+
+{% block content %}
+
+<!-- Search Content --> 
+
+<div class="container-fluid">
+  <h3 class="create-heading">CREATE COMMUNITIEZ</h3>
+      <div class="create-form">
+        <div class="create-form-content">
+          <form action="#">
+              <div class="form-group create-form-dropdown">
+                <label for="CreateCommunityDropdown">Category:</label>
+                <select class="form-control" id="createCommunityDropdown">
+                  <option>Gaming</option>
+                  <option>Fashion</option>
+                  <option>Music</option>
+                  <option>Tech</option>
+                  <option>Coding</option>
+                  <option>Sport</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="createCommunityAbout">About the Community:</label>
+                <div class="row">
+                <div class="col-lg-10 create-form-box">
+                  <textarea class="form-control create-form-box-content" id="createCommunityAbout" rows="3"></textarea>
+                </div>
+                <div class="col-lg-2 create-form-btn">
+                  <button type="submit" class="btn btn-light btn-search">Create</button>
+                </div>
+                </div>
+              </div>
+          </form>
+        </div>
+ </div>
+
+ {% endblock %}
