@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Search Community{% endblock %}
+
+{% block navbar %}
+
+<!-- Navigation Bar -->
+
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">Communitiez</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item nav-item-homepage">
+          <a class="nav-link" href="#">Search Communitiez</a>
+        </li>
+        <li class="nav-item nav-item-homepage">
+          <a class="nav-link" href="{{ url_for('view.create_community') }}">Create Community</a>
+        </li>
+        <li class="nav-item nav-item-homepage">
+          <a class="nav-link" href="{{ url_for('auth.logout') }}">Log Out</a>
+        </li>
+      </ul>
+    </div>
+</nav>
+
+{% endblock %}
+
+{% block content %}
+
+<!-- Community Page Content --> 
+<div class="community-page-about-box container-fluid">
+    <form action="#" class="community-page-form">
+        <h3 class="community-page-heading">cz/community-name</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Sed vulputate eget est eget ultricies. Proin euismod mauris
+            id vehicula consectetur. In hac habitasse platea dictumst. 
+            Nulla facilisi. Pellentesque vitae est ac purus auctor 
+            elementum. Sed sagittis nibh quis augue elementum, a 
+            facilisis augue condimentum. Sed tempor vitae odio sed 
+            fringilla. Integer massa magna, auctor at purus sit amet, 
+            porttitor aliquet enim. Quisque ac molestie mauris, id 
+            consequat magna. Etiam interdum ante sed quam aliquet porta. 
+            Proin ut nunc bibendum, tristique metus eu, consectetur 
+            lorem. Donec eleifend commodo finibus. Donec blandit elit 
+            id rhoncus pretium. Mauris semper placerat leo imperdiet 
+            ultricies.
+        </p>
+        <button type="submit" class="btn btn-light community-page-join-btn">Join</button>
+    </form>
+</div>
+
+<div class="community-page-post container-fluid">
+    <div class="community-page-post-content">
+        <h4>Topic Heading</h4> 
+        <h5>Group Name</h5>
+        <p>Posted by (username)</p>
+        <p>Number of comments</p>
+    </div>
+</div>
+
+{% endblock %}

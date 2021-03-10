@@ -79,7 +79,7 @@ h1 {
     margin-top: 10px;
 }
 
-/* Home Page, Search Page, Create Page */
+/* Home Page, Search Page, Create Page, Community Page */
 
 .home-heading, .search-heading, .create-heading {
     margin-top: 50px;
@@ -93,7 +93,7 @@ h1 {
     margin-top: 5px;
 }
 
-.home-post, .home-categories, .search-bar, .create-form {
+.home-post, .home-categories, .search-bar, .create-form, .community-page-about-box, .community-page-post {
     background-color: white;
     border: 0.5px solid #30E3CA;
     border-radius: 5px;
@@ -121,4 +121,26 @@ h1 {
 
 .create-form-dropdown {
     width: 340px;
+}
+
+/* Community Page */
+
+.community-page-about-box {
+    margin-top: 40px;
+}
+
+.community-page-form {
+    padding: 20px 10px 20px 10px;
+}
+
+.community-page-join-btn {
+    background-color: #30E3CA;
+}
+
+.community-page-post {
+    margin-top: 10px;
+}
+
+.community-page-post-content {
+    padding: 20px 10px 20px 10px;
 }

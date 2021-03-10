@@ -22,3 +22,8 @@ def search_communitiez():
 @login_required
 def create_community():
     return render_template("create_community.html")
+
+@view.route('community_page')
+@login_required
+def community_page():
+    return render_template("community_page.html")
