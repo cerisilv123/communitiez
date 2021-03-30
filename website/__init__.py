@@ -29,7 +29,7 @@ def create_app():
     app.register_blueprint(view, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/auth')
 
-    from .models import User
+    from .models import User, Community, Usercommunity, Post, Comment
     create_database(app)
 
     login_manager = LoginManager()
