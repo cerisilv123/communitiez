@@ -15,6 +15,7 @@ class Community(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), unique=True)
     category = db.Column(db.String(150))
+    about = db.Column(db.String(1000))
     usercommunities = db.relationship('Usercommunity')
     posts = db.relationship('Post')
 

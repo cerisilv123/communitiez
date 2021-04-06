@@ -36,10 +36,14 @@
   <h3 class="create-heading">CREATE COMMUNITIEZ</h3>
       <div class="create-form">
         <div class="create-form-content">
-          <form action="#">
+          <form action="#" method="post">
+              <div class="form-group">
+                <label for="createCommunityName">Enter Community Name: </label>
+                <input type="text" class="form-control" id="createCommunityName" name="createCommunityName" placeholder="Enter Community Name:">
+              </div>
               <div class="form-group create-form-dropdown">
                 <label for="CreateCommunityDropdown">Category:</label>
-                <select class="form-control" id="createCommunityDropdown">
+                <select class="form-control" id="createCommunityDropdown" name="createCommunityDropdown">
                   <option>Gaming</option>
                   <option>Fashion</option>
                   <option>Music</option>
@@ -53,10 +57,10 @@
                 <label for="createCommunityAbout">About the Community:</label>
                 <div class="row">
                 <div class="col-lg-10 create-form-box">
-                  <textarea class="form-control create-form-box-content" id="createCommunityAbout" rows="3"></textarea>
+                  <textarea class="form-control create-form-box-content" id="createCommunityAbout" name="createCommunityAbout" rows="3"></textarea>
                 </div>
                 <div class="col-lg-2 create-form-btn">
-                  <button type="submit" class="btn btn-light btn-search">Create</button>
+                  <button type="submit" class="btn btn-light btn-search" value ="createCommunity">Create</button>
                 </div>
                 </div>
               </div>
