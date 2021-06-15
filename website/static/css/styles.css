@@ -85,21 +85,17 @@ h1 {
     margin-top: 50px;
 }
 
-.home-post, .search-bar {
+.home-post, .search-bar, .search-communitiez-content, .home-categories {
     margin-top: 5px;
 }
 
-.home-categories {
-    margin-top: 5px;
-}
-
-.home-post, .home-categories, .search-bar, .create-form, .community-page-about-box, .community-page-post {
+.home-post, .home-categories, .search-bar, .create-form, .community-page-about-box, .community-page-post, .search-communitiez-content {
     background-color: white;
     border: 0.5px solid #30E3CA;
     border-radius: 5px;
 }
 
-.home-post-content, .home-categories-content, .search-bar-content, .create-form-content {
+.home-post-content, .home-categories-content, .search-bar-content, .create-form-content, .search-communitiez-content {
     padding: 10px 15px 2.5px 15px;
 }
 
@@ -111,6 +107,11 @@ h1 {
 
 .btn-search {
     background-color: #30E3CA;
+}
+
+.search-communitiez-content {
+    margin-left: 1.5px;
+    margin-right: 1.5px;
 }
 
 /* create_community page */

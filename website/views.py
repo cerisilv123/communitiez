@@ -17,7 +17,21 @@ def home():
 @view.route('/search_communitiez')
 @login_required
 def search_communitiez():
-    return render_template("search_communitiez.html")
+    
+    if request.method == 'POST':
+        return print("Post test")
+    else: 
+        communitiez_list = []
+        communities = Community.query.all()
+        for x in communities:
+            community = []
+            community.append(x.name)
+            community.append(x.category)
+            community.append(x.about)
+            communitiez_list.append(community)
+        
+        return render_template('search_communitiez.html', communitiez_list = communitiez_list)
+        
 
 @view.route('create_community', methods=["POST", "GET"])
 @login_required

@@ -53,6 +53,17 @@
           </form>
         </div>
       </div>
+      {% for community in communitiez_list %}
+          <div class="row search-communitiez-content">
+            <div class="col-lg-11">
+              <p>cz/{{community[0]}}</p>
+              <p>{{community[2]}}</p>
+            </div>
+            <div class="col-lg-1">
+              <p>{{community[1]}}</p>
+            </div>
+          </div>
+        {% endfor %}
     </div>
     <div class="col-lg-2">
       <div class="home-categories">
@@ -71,4 +82,4 @@
   </div>
 </div>  
 
-  {% endblock %}
+{% endblock %}
