@@ -90,6 +90,12 @@ def signup():
 @auth.route('/logout')
 @login_required
 def logout():
+    """ this function creates the route for the user 
+    to logout from an account on Communitiez. The function 
+    checks to see if the user is already logged in. 
+    If all criteria is met the user is logged out.
+    """
+    
     logout_user()
     flash("You have been logged out successfully!", category="success")
     return(redirect(url_for("auth.login")))
