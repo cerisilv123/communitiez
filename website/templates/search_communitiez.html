@@ -38,12 +38,12 @@
     <div class="col-lg-10">
       <div class="search-bar">
         <div class="search-bar-content">
-          <form action="#">
+          <form action="#", method="post">
               <div class="form-group">
                 <label for="searchCommunitiez">Search:</label>
                 <div class="row">
                 <div class="col-lg-10 search-bar-box">
-                  <input type="text" class="form-control" id="searchCommunitiez">
+                  <input type="text" class="form-control" id="searchCommunitiez" name="searchCommunitiez">
                 </div>
                 <div class="col-lg-2 search-bar-btn">
                   <button type="submit" class="btn btn-light btn-search">Search</button>
@@ -69,13 +69,13 @@
       <div class="home-categories">
         <div class="home-categories-content">
           <h6>Categories</h6>
-          <p><a href="#">All</a></p>
-          <p><a href="#">Gaming</a></p>
-          <p><a href="#">Fashion</a></p>
-          <p><a href="#">Music</a></p>
-          <p><a href="#">Tech</a></p>
-          <p><a href="#">Coding</a></p>
-          <p><a href="#">Sport</a></p>
+          <p><a href="{{ url_for('view.search_communitiez_category', category='All') }}">All</a></p>
+          <p><a href="{{ url_for('view.search_communitiez_category', category='Gaming') }}">Gaming</a></p>
+          <p><a href="{{ url_for('view.search_communitiez_category', category='Fashion') }}">Fashion</a></p>
+          <p><a href="{{ url_for('view.search_communitiez_category', category='Music') }}">Music</a></p>
+          <p><a href="{{ url_for('view.search_communitiez_category', category='Tech') }}">Tech</a></p>
+          <p><a href="{{ url_for('view.search_communitiez_category', category='Coding') }}">Coding</a></p>
+          <p><a href="{{ url_for('view.search_communitiez_category', category='Sport') }}">Sport</a></p>
         </div>
       </div>
     </div>

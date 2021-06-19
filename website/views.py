@@ -14,15 +14,24 @@ def landing():
 def home():
     return render_template('home.html')
 
-@view.route('/search_communitiez')
+@view.route('/search_communitiez', methods=["POST", "GET"])
 @login_required
 def search_communitiez():
     
+    communitiez_list = []
+    communities = Community.query.all()
+
     if request.method == 'POST':
-        return print("Post test")
+        users_search = request.form['searchCommunitiez'] #Finish this code
+        for x in communities:
+            if users_search in x.name:
+                community = []
+                community.append(x.name)
+                community.append(x.category)
+                community.append(x.about)
+                communitiez_list.append(community)
+        
     else: 
-        communitiez_list = []
-        communities = Community.query.all()
         for x in communities:
             community = []
             community.append(x.name)
@@ -30,10 +39,40 @@ def search_communitiez():
             community.append(x.about)
             communitiez_list.append(community)
         
-        return render_template('search_communitiez.html', communitiez_list = communitiez_list)
+    return render_template('search_communitiez.html', communitiez_list = communitiez_list)
+
+@view.route('search_communitiez/<category>', methods=["POST", "GET"])
+@login_required
+def search_communitiez_category(category):
+
+    communitiez_list = []
+    communities = Community.query.all()
+
+    if request.method == 'POST':
+        users_search = request.form['searchCommunitiez'] #Finish this code
+        for x in communities:
+            if users_search in x.name:
+                community = []
+                community.append(x.name)
+                community.append(x.category)
+                community.append(x.about)
+                communitiez_list.append(community)
+    
+    else: 
+        for x in communities:
+            if x.category == category or category == 'All':
+                community = []
+                community.append(x.name)
+                community.append(x.category)
+                community.append(x.about)
+                communitiez_list.append(community)
+        
+    return render_template('search_communitiez.html', communitiez_list = communitiez_list)
         
 
-@view.route('create_community', methods=["POST", "GET"])
+
+
+@view.route('/create_community', methods=["POST", "GET"])
 @login_required
 def create_community():
     """ this function creates the route for the user 
@@ -73,7 +112,7 @@ def create_community():
     else: 
         return render_template("create_community.html")
 
-@view.route('community_page')
+@view.route('/community_page')
 @login_required
 def community_page():
     return render_template("community_page.html")
