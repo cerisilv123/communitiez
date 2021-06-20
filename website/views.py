@@ -17,12 +17,15 @@ def home():
 @view.route('/search_communitiez', methods=["POST", "GET"])
 @login_required
 def search_communitiez():
+    """ This function creates the route for the
+    user to search for different Communitiez. 
+    """
     
     communitiez_list = []
     communities = Community.query.all()
 
     if request.method == 'POST':
-        users_search = request.form['searchCommunitiez'] #Finish this code
+        users_search = request.form['searchCommunitiez'] 
         for x in communities:
             if users_search in x.name:
                 community = []
@@ -44,12 +47,15 @@ def search_communitiez():
 @view.route('search_communitiez/<category>', methods=["POST", "GET"])
 @login_required
 def search_communitiez_category(category):
+    """ This function creates the route for the
+    user to search for communtiez via their category. 
+    """
 
     communitiez_list = []
     communities = Community.query.all()
 
     if request.method == 'POST':
-        users_search = request.form['searchCommunitiez'] #Finish this code
+        users_search = request.form['searchCommunitiez'] 
         for x in communities:
             if users_search in x.name:
                 community = []
@@ -112,7 +118,15 @@ def create_community():
     else: 
         return render_template("create_community.html")
 
-@view.route('/community_page')
+@view.route('/community_page/<community_name>')
 @login_required
-def community_page():
-    return render_template("community_page.html")
+def community_page(community_name):
+
+    if request.method == 'POST':
+        return render_template("community_page.html")
+    else: 
+        community_details = Community.query.filter_by(name=community_name).first()
+        community_about = community_details.about
+        community_category = community_details.category
+
+        return render_template("community_page.html", community_name=community_name, community_about=community_about, community_category=community_category)

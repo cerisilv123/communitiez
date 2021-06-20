@@ -14,7 +14,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item nav-item-homepage">
-          <a class="nav-link" href="#">Search Communitiez</a>
+          <a class="nav-link" href="{{ url_for('view.search_communitiez') }}">Search Communitiez</a>
         </li>
         <li class="nav-item nav-item-homepage">
           <a class="nav-link" href="{{ url_for('view.create_community') }}">Create Community</a>
@@ -33,21 +33,9 @@
 <!-- Community Page Content --> 
 <div class="community-page-about-box container-fluid">
     <form action="#" class="community-page-form">
-        <h3 class="community-page-heading">cz/community-name</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Sed vulputate eget est eget ultricies. Proin euismod mauris
-            id vehicula consectetur. In hac habitasse platea dictumst. 
-            Nulla facilisi. Pellentesque vitae est ac purus auctor 
-            elementum. Sed sagittis nibh quis augue elementum, a 
-            facilisis augue condimentum. Sed tempor vitae odio sed 
-            fringilla. Integer massa magna, auctor at purus sit amet, 
-            porttitor aliquet enim. Quisque ac molestie mauris, id 
-            consequat magna. Etiam interdum ante sed quam aliquet porta. 
-            Proin ut nunc bibendum, tristique metus eu, consectetur 
-            lorem. Donec eleifend commodo finibus. Donec blandit elit 
-            id rhoncus pretium. Mauris semper placerat leo imperdiet 
-            ultricies.
-        </p>
+        <h3 class="community-page-heading">cz/{{community_name}}</h3>
+        <h5>{{community_category}}</h5>
+        <p>{{community_about}}</p>
         <button type="submit" class="btn btn-light community-page-join-btn">Join</button>
     </form>
 </div>
