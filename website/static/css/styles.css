@@ -99,6 +99,10 @@ h1 {
     padding: 10px 15px 2.5px 15px;
 }
 
+.create-form-btn-community-page {
+    margin-top: 10px;
+}
+
 /* search_comunitiez page */
 
 .search-bar-box, .search-bar-btn {
