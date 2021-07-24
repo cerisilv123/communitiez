@@ -121,6 +121,11 @@ def create_community():
 @view.route('/community_page/<community_name>', methods=["POST", "GET"])
 @login_required
 def community_page(community_name):
+    """ This function creates the route for the 
+    community page. The user can either press a button
+    to join the community or if the user is a member
+    they can post a message to the group wall.
+    """
     
     is_member = False
     community_details = Community.query.filter_by(name=community_name).first()
@@ -130,11 +135,14 @@ def community_page(community_name):
 
     if request.method == 'POST':
         if request.form["hiddenCommunityPageForm"] == "postMessage":
-            message = request.form["communityPagePostMessage"]
-            heading = request.form["communityPagePostMessageHeading"]
-            new_community_post = Post(user_id=current_user.id, community_id=community_details.id, text=message, heading=heading)
-            db.session.add(new_community_post)
-            db.session.commit()
+            if is_member:
+                message = request.form["communityPagePostMessage"]
+                heading = request.form["communityPagePostMessageHeading"]
+                new_community_post = Post(user_id=current_user.id, community_id=community_details.id, text=message, heading=heading)
+                db.session.add(new_community_post)
+                db.session.commit()
+            else:
+                flash("You have to be a member of this community to post!", category="error")
         else:
             if is_member: 
                 db.session.delete(user_community_details)
@@ -151,14 +159,13 @@ def community_page(community_name):
         community_post_details = Post.query.filter_by(community_id=community_details.id)
         community_posts = []
         for post in community_post_details:
+            username = User.query.filter_by(id=post.user_id).first()
             community_post = {
                 "heading":post.heading, 
                 "text":post.text, 
                 "date":post.date, 
-                "user_id":post.user_id
+                "user_id":username.username
             }
             community_posts.append(community_post)
-
-        print(community_posts)
 
         return render_template("community_page.html", community_name=community_name, community_about=community_about, community_category=community_category, is_member=is_member, community_posts=community_posts)
