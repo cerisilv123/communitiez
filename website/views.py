@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, flash, redirect, url_for, request
 from flask_login import login_required, current_user
-from .models import User, Community, Usercommunity, Post
+from .models import User, Community, Usercommunity, Post, Comment
 from . import db
 
 view = Blueprint('view', __name__)
@@ -75,9 +75,6 @@ def search_communitiez_category(category):
         
     return render_template('search_communitiez.html', communitiez_list = communitiez_list)
         
-
-
-
 @view.route('/create_community', methods=["POST", "GET"])
 @login_required
 def create_community():
@@ -122,7 +119,7 @@ def create_community():
 @login_required
 def community_page(community_name):
     """ This function creates the route for the 
-    community page. The user can either press a button
+    community page. The user can either press a bcd Desktoputton
     to join the community or if the user is a member
     they can post a message to the group wall.
     """
@@ -155,7 +152,6 @@ def community_page(community_name):
     else:  
         community_about = community_details.about
         community_category = community_details.category
-
         community_post_details = Post.query.filter_by(community_id=community_details.id)
         community_posts = []
         for post in community_post_details:
@@ -164,8 +160,36 @@ def community_page(community_name):
                 "heading":post.heading, 
                 "text":post.text, 
                 "date":post.date, 
-                "user_id":username.username
+                "user_id":username.username,
+                "post_id":post.id
             }
             community_posts.append(community_post)
 
         return render_template("community_page.html", community_name=community_name, community_about=community_about, community_category=community_category, is_member=is_member, community_posts=community_posts)
+
+@view.route('/community_page/<community_name>/community_post/<post_id>', methods=["POST", "GET"])
+@login_required
+def community_post(community_name, post_id):
+    if request.method == 'POST':
+        if is_member: 
+            comment = request.form["communityPagePostComment"]
+            new_post_comment = Comment(text=comment, user_id=current_user.id, post_id=post_id)
+            db.session.add(new_post_comment)
+            db.session.commit()
+        else: 
+            flash("You have to be a member of this community to post!", category="error")
+
+    else:
+        post = Post.query.filter_by(id=post_id).first()
+        user_id = User.query.filter_by(id=post.user_id).first()
+        username = user_id.username
+        post_heading = post.heading
+        post_text = post.text
+        post_date = post.date
+        
+        post_comments_details = Comment.query.filter_by(post_id=post_id)
+        post_comments = []
+        for comment in post_comments:
+            #Complete this Code
+
+        return render_template("community_post.html", community_name=community_name, post_id=post_id, username=username, post_heading=post_heading, post_text=post_text, post_date=post_date)

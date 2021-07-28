@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Search Community{% endblock %}
+
+{% block navbar %}
+
+<!-- Navigation Bar -->
+
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">Communitiez</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item nav-item-homepage">
+          <a class="nav-link" href="{{ url_for('view.search_communitiez') }}">Search Communitiez</a>
+        </li>
+        <li class="nav-item nav-item-homepage">
+          <a class="nav-link" href="{{ url_for('view.create_community') }}">Create Community</a>
+        </li>
+        <li class="nav-item nav-item-homepage">
+          <a class="nav-link" href="{{ url_for('auth.logout') }}">Log Out</a>
+        </li>
+      </ul>
+    </div>
+</nav>
+
+{% endblock %}
+
+{% block content %}
+
+<!-- Community Post -->
+<div class="community-page-post container-fluid">
+    <div class="community-page-post-content">
+        <h3>{{post_heading}}</h3> 
+        <h4>{{post_text}}</h4>
+        <p><a href="{{ url_for('view.community_page', community_name=community_name) }}">cz/{{community_name}}</a></p>
+        <p>Posted by {{username}}</p>
+        <p>{{post_date}}</p>
+        <p>Number of comments</p>
+    </div>
+</div>
+
+<!-- Community Page - Post a comment -->
+<div class="community-page-about-box container-fluid">
+    <form action="#" method="post" class="community-page-form">
+      <div class="form-group">
+        <label for="communityPagePostComment">Add a Comment:</label>
+        <div class="row">
+        <div class="col-lg-12 create-form-box">
+          <textarea class="form-control create-form-box-content" id="communityPagePostComment" name="communityPagePostComment" rows="3"></textarea>
+        </div>
+        <div class="col-lg-12 create-form-btn create-form-btn-community-page">
+          <button type="submit" class="btn btn-light btn-search" value ="communityPagePostComment">Comment</button>
+        </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+<!-- Community Post Comment -->
+<div class="community-page-post container-fluid">
+    <div class="community-page-post-content">
+        <h5>COMMENT TEXT</h5>
+        <p>Posted by</p>
+        <p>Date</p>
+    </div>
+</div>
+
+{% endblock %}
