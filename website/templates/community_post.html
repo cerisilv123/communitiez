@@ -60,12 +60,14 @@
   </div>
 
 <!-- Community Post Comment -->
-<div class="community-page-post container-fluid">
-    <div class="community-page-post-content">
-        <h5>COMMENT TEXT</h5>
-        <p>Posted by</p>
-        <p>Date</p>
-    </div>
-</div>
+{% for comments in post_comments %}
+  <div class="community-page-post container-fluid">
+      <div class="community-page-post-content">
+          <h5>{{comments["text"]}}</h5>
+          <p>Commented by {{comments["comment_username"]}}</p>
+          <p>{{comments["date"]}}</p>
+      </div>
+  </div>
+{% endfor %}
 
 {% endblock %}

@@ -75,16 +75,16 @@
 
 <!-- Community Page - Posts -->
 {% for posts in community_posts %}
-      <div class="community-page-post container-fluid">
-          <div class="community-page-post-content">
-              <h3>{{posts["heading"]}}</h3> 
-              <h4><a href="{{ url_for('view.community_post', community_name=community_name, post_id=posts["post_id"]) }}">{{posts["text"]}}</a></h4>
-              <p><a href="{{ url_for('view.community_page', community_name=community_name) }}">cz/{{community_name}}</a></p>
-              <p>Posted by {{posts["user_id"]}}</p>
-              <p>{{posts["date"]}}</p>
-              <p>Number of comments</p>
-          </div>
-      </div>
+    <div class="community-page-post container-fluid">
+        <div class="community-page-post-content">
+            <h3>{{posts["heading"]}}</h3> 
+            <h4><a href="{{ url_for('view.community_post', community_name=community_name, post_id=posts["post_id"]) }}">{{posts["text"]}}</a></h4>
+            <p><a href="{{ url_for('view.community_page', community_name=community_name) }}">cz/{{community_name}}</a></p>
+            <p>Posted by {{posts["user_id"]}}</p>
+            <p>{{posts["date"]}}</p>
+            <p>Number of comments</p>
+        </div>
+    </div>
 {% endfor %}
 
 {% endblock %}

@@ -12,7 +12,29 @@ def landing():
 @view.route('/home')
 @login_required
 def home():
-    return render_template('home.html')
+    """ This function creates the route for the
+    for the first page the user is directed to 
+    after logging in. Posts are retrieved from 
+    database and displayed to the page.  
+    """
+
+    community_post_details = Post.query.all()
+    community_posts = []
+    for post in community_post_details:
+        community_name = Community.query.filter_by(id=post.community_id).first()
+        community_name = community_name.name
+        username = User.query.filter_by(id=post.user_id).first()
+        community_post = {
+            "heading":post.heading, 
+            "text":post.text, 
+            "date":post.date, 
+            "user_id":username.username,
+            "post_id":post.id,
+            "community_name_id":community_name
+        }
+        community_posts.append(community_post)
+
+    return render_template('home.html', community_posts=community_posts, community_name=community_name)
 
 @view.route('/search_communitiez', methods=["POST", "GET"])
 @login_required
@@ -119,7 +141,7 @@ def create_community():
 @login_required
 def community_page(community_name):
     """ This function creates the route for the 
-    community page. The user can either press a bcd Desktoputton
+    community page. The user can either press a button
     to join the community or if the user is a member
     they can post a message to the group wall.
     """
@@ -170,14 +192,28 @@ def community_page(community_name):
 @view.route('/community_page/<community_name>/community_post/<post_id>', methods=["POST", "GET"])
 @login_required
 def community_post(community_name, post_id):
+    """ This function creates the route for a community
+    page post. The user can write a comment on the post
+    or read multiple comments displayed.
+    """
+
+    is_member = False
+    community_details = Community.query.filter_by(name=community_name).first()
+    user_community_details = Usercommunity.query.filter_by(user_id=current_user.id, community_id=community_details.id).first()
+    if user_community_details is not None:
+            is_member = True
+
     if request.method == 'POST':
         if is_member: 
+            user = User.query.filter_by(id=current_user.id).first()
+            username = user.username
             comment = request.form["communityPagePostComment"]
             new_post_comment = Comment(text=comment, user_id=current_user.id, post_id=post_id)
             db.session.add(new_post_comment)
             db.session.commit()
         else: 
             flash("You have to be a member of this community to post!", category="error")
+        return redirect(url_for('view.community_post', community_name=community_name, post_id=post_id))
 
     else:
         post = Post.query.filter_by(id=post_id).first()
@@ -187,9 +223,15 @@ def community_post(community_name, post_id):
         post_text = post.text
         post_date = post.date
         
-        post_comments_details = Comment.query.filter_by(post_id=post_id)
+        post_comments_details = Comment.query.filter_by(post_id=post_id).all()
         post_comments = []
-        for comment in post_comments:
-            #Complete this Code
+        for comment in post_comments_details:
+            users_comment = User.query.filter_by(id=comment.user_id).first() 
+            post_comment = {
+                "text":comment.text, 
+                "date":comment.date,
+                "comment_username":users_comment.username
+            }
+            post_comments.append(post_comment)
 
-        return render_template("community_post.html", community_name=community_name, post_id=post_id, username=username, post_heading=post_heading, post_text=post_text, post_date=post_date)
+        return render_template("community_post.html", community_name=community_name, post_id=post_id, username=username, post_heading=post_heading, post_text=post_text, post_date=post_date, post_comments=post_comments)
