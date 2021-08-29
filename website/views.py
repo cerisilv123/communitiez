@@ -36,6 +36,33 @@ def home():
 
     return render_template('home.html', community_posts=community_posts, community_name=community_name)
 
+@view.route('home/<category>')
+@login_required
+def home_category(category):
+    """ This displays the posts onto the 
+    homepage from the category the user 
+    has selected.
+    """
+    community_post_details = Post.query.all()
+    community_posts = []
+    for post in community_post_details: 
+        community_name = Community.query.filter_by(id=post.community_id).first()
+        community_name = community_name.name
+        community = Community.query.filter_by(id=post.community_id).first()
+        if category == community.category:
+            username = User.query.filter_by(id=post.user_id).first()
+            community_post = {
+                "heading":post.heading,
+                "text":post.text,
+                "date":post.date,
+                "user_id":username.username,
+                "post_id":post.id,
+                "community_name_id":community_name
+            }
+            community_posts.append(community_post)
+
+    return render_template('home.html', community_posts=community_posts, community_name="Test_name")
+
 @view.route('/search_communitiez', methods=["POST", "GET"])
 @login_required
 def search_communitiez():
