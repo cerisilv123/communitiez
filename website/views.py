@@ -9,7 +9,7 @@ view = Blueprint('view', __name__)
 def landing():
     return render_template('index.html')
 
-@view.route('/home')
+@view.route('/home', methods=["POST", "GET"])
 @login_required
 def home():
     """ This function creates the route for the
@@ -17,7 +17,6 @@ def home():
     after logging in. Posts are retrieved from 
     database and displayed to the page.  
     """
-
     community_post_details = Post.query.all()
     community_posts = []
     for post in community_post_details:
@@ -34,7 +33,16 @@ def home():
         }
         community_posts.append(community_post)
 
-    return render_template('home.html', community_posts=community_posts, community_name=community_name)
+    if request.method == 'POST':
+         sort_dropdown = request.form.get('sortDropdown')
+         if sort_dropdown == 'Newest to oldest':
+            print("Newest to oldest!!!!!")
+            # NEED TO FINISH THIS CODE - CREATE A NEW VIEW - "HOME_SORT() THEN PASS THE SORTED LIST THROUGH"
+            return redirect(url_for('view.search_communitiez')) # WAS JUST TESTING THIS
+    else: 
+        return render_template('home.html', community_posts=community_posts)
+
+        
 
 @view.route('home/<category>')
 @login_required
