@@ -17,6 +17,7 @@ def home():
     after logging in. Posts are retrieved from 
     database and displayed to the page.  
     """
+
     community_post_details = Post.query.all()
     community_posts = []
     for post in community_post_details:
@@ -34,15 +35,48 @@ def home():
         community_posts.append(community_post)
 
     if request.method == 'POST':
-         sort_dropdown = request.form.get('sortDropdown')
-         if sort_dropdown == 'Newest to oldest':
-            print("Newest to oldest!!!!!")
-            # NEED TO FINISH THIS CODE - CREATE A NEW VIEW - "HOME_SORT() THEN PASS THE SORTED LIST THROUGH"
-            return redirect(url_for('view.search_communitiez')) # WAS JUST TESTING THIS
+        sort_dropdown = request.form.get('sortDropdown')
+        return redirect(url_for('view.home_sort', sort_dropdown = sort_dropdown)) 
     else: 
         return render_template('home.html', community_posts=community_posts)
 
-        
+@view.route('home/<sort_dropdown>', methods=["POST", "GET"])
+@login_required
+def home_sort(sort_dropdown):
+    """ This function creates the route for the
+    for the home page when the user has sorted 
+    posts using the dropdown. Posts are retrieved 
+    from the database and displayed to the page.  
+    """
+     
+    community_post_details = Post.query.all()
+    community_posts = []
+    for post in community_post_details:
+        community_name = Community.query.filter_by(id=post.community_id).first()
+        community_name = community_name.name
+        username = User.query.filter_by(id=post.user_id).first()
+        community_post = {
+            "heading":post.heading, 
+            "text":post.text, 
+            "date":post.date, 
+            "user_id":username.username,
+            "post_id":post.id,
+            "community_name_id":community_name
+        }
+        community_posts.append(community_post)
+
+    if request.method == 'POST':
+        sort_dropdown = request.form.get('sortDropdown')
+        return redirect(url_for('view.home_sort', sort_dropdown = sort_dropdown))
+    else: 
+        if sort_dropdown == 'Oldest to newest':
+            return render_template('home.html', community_posts=community_posts)
+        elif sort_dropdown == 'Newest to oldest':
+            community_posts = reversed(community_posts)
+            return render_template('home.html', community_posts=community_posts)
+        elif sort_dropdown == 'Most relevant':
+            # Need to complete this part of the function!!!!!!
+            return render_template('home.html', community_posts=community_posts)
 
 @view.route('home/<category>')
 @login_required
