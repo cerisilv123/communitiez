@@ -38,8 +38,8 @@
   <div class="row sort-dropdown">
     <form action="#" method="post">
         <select class="form-control" id="sortDropdown" name="sortDropdown">
-          <option>Oldest to newest</option>
           <option>Newest to oldest</option>
+          <option>Oldest to newest</option>
           <option>Most relevant</option>
         </select>
         <button type="submit" class="btn btn-light btn-search">Sort</button>
@@ -66,12 +66,12 @@
         <div class="home-categories-content">
           <h6>Categories</h6>
           <p><a href="{{ url_for('view.home') }}">All</a></p>
-          <p><a href="{{ url_for('view.home_category', category="Gaming") }}">Gaming</a></p>
-          <p><a href="{{ url_for('view.home_category', category="Fashion") }}">Fashion</a></p>
-          <p><a href="{{ url_for('view.home_category', category="Music") }}">Music</a></p>
-          <p><a href="{{ url_for('view.home_category', category="Tech") }}">Tech</a></p>
-          <p><a href="{{ url_for('view.home_category', category="Coding") }}">Coding</a></p>
-          <p><a href="{{ url_for('view.home_category', category="Sport") }}">Sport</a></p>
+          <p><a href="{{ url_for('view.home_category', category='Gaming') }}">Gaming</a></p>
+          <p><a href="{{ url_for('view.home_category', category='Fashion') }}">Fashion</a></p>
+          <p><a href="{{ url_for('view.home_category', category='Music') }}">Music</a></p>
+          <p><a href="{{ url_for('view.home_category', category='Tech') }}">Tech</a></p>
+          <p><a href="{{ url_for('view.home_category', category='Coding') }}">Coding</a></p>
+          <p><a href="{{ url_for('view.home_category', category='Sport') }}">Sport</a></p>
         </div>
       </div>
     </div>

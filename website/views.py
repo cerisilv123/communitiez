@@ -38,6 +38,7 @@ def home():
         sort_dropdown = request.form.get('sortDropdown')
         return redirect(url_for('view.home_sort', sort_dropdown = sort_dropdown)) 
     else: 
+        community_posts = reversed(community_posts) #Sorts posts from newest to oldest
         return render_template('home.html', community_posts=community_posts)
 
 @view.route('home/<sort_dropdown>', methods=["POST", "GET"])
@@ -56,6 +57,7 @@ def home_sort(sort_dropdown):
         community_name = community_name.name
         username = User.query.filter_by(id=post.user_id).first()
         community_post = {
+            "community_id":post.community_id,
             "heading":post.heading, 
             "text":post.text, 
             "date":post.date, 
@@ -69,14 +71,25 @@ def home_sort(sort_dropdown):
         sort_dropdown = request.form.get('sortDropdown')
         return redirect(url_for('view.home_sort', sort_dropdown = sort_dropdown))
     else: 
-        if sort_dropdown == 'Oldest to newest':
-            return render_template('home.html', community_posts=community_posts)
-        elif sort_dropdown == 'Newest to oldest':
+        if sort_dropdown == 'Newest to oldest':
             community_posts = reversed(community_posts)
             return render_template('home.html', community_posts=community_posts)
-        elif sort_dropdown == 'Most relevant':
-            # Need to complete this part of the function!!!!!!
+        elif sort_dropdown == 'Oldest to newest':
             return render_template('home.html', community_posts=community_posts)
+        elif sort_dropdown == 'Most relevant':
+            users_communties = current_user.usercommunities
+            community_ids = []
+            for community in users_communties:
+                community_ids.append(community.community_id)
+            new_community_posts = []
+            for post in community_posts: 
+                for ids in community_ids:
+                    if ids == post["community_id"]:
+                        new_community_posts.append(post)
+
+            new_community_posts = reversed(new_community_posts)
+                    
+            return render_template('home.html', community_posts=new_community_posts)
 
 @view.route('home/<category>')
 @login_required
@@ -85,6 +98,7 @@ def home_category(category):
     homepage from the category the user 
     has selected.
     """
+
     community_post_details = Post.query.all()
     community_posts = []
     for post in community_post_details: 
@@ -94,6 +108,7 @@ def home_category(category):
         if category == community.category:
             username = User.query.filter_by(id=post.user_id).first()
             community_post = {
+                "community_id":post.community_id,
                 "heading":post.heading,
                 "text":post.text,
                 "date":post.date,
@@ -102,8 +117,8 @@ def home_category(category):
                 "community_name_id":community_name
             }
             community_posts.append(community_post)
-
-    return render_template('home.html', community_posts=community_posts, community_name="Test_name")
+    # FIX THIS FUNCTION
+    return render_template('home.html', community_posts=community_posts)
 
 @view.route('/search_communitiez', methods=["POST", "GET"])
 @login_required
