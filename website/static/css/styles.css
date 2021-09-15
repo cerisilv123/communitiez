@@ -89,7 +89,7 @@ h1 {
     margin-top: 5px;
 }
 
-.home-post, .home-categories, .search-bar, .create-form, .community-page-about-box, .community-page-post, .search-communitiez-content {
+.home-post, .home-categories, .search-bar, .create-form, .community-page-about-box, .community-page-post, .search-communitiez-content, .profile-page-about-box {
     background-color: white;
     border: 0.5px solid #30E3CA;
     border-radius: 5px;
@@ -149,3 +149,18 @@ h1 {
 .community-page-post-content {
     padding: 20px 10px 20px 10px;
 }
+
+/* Profile Page */
+
+.profile-page-about-box {
+    margin-top: 40px;
+}
+
+.profile-page-post {
+    margin-top: 10px;
+}
+
+.profile-page-post-content {
+    padding: 20px 10px 20px 10px;
+}
+

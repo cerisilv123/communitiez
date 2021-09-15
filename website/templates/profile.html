@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Profile Page{% endblock %}
+
+{% block navbar %}
+
+<!-- Navigation Bar -->
+
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="{{ url_for('view.home') }}">Communitiez</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item nav-item-homepage">
+          <a class="nav-link" href="{{ url_for('view.search_communitiez') }}">Search Communitiez</a>
+        </li>
+        <li class="nav-item nav-item-homepage">
+          <a class="nav-link" href="{{ url_for('view.create_community') }}">Create Community</a>
+        </li>
+        <li class="nav-item nav-item-homepage">
+          <a class="nav-link" href="{{ url_for('auth.logout') }}">Log Out</a>
+        </li>
+      </ul>
+    </div>
+</nav>
+
+{% endblock %}
+
+{% block content %}
+
+<!-- Profile Page Content --> 
+<div class="profile-page-about-box container-fluid">
+    <h3 class="profile-page-heading">member/username</h3>      
+</div>
+
+<!-- Profile Page - Posts -->
+{% for posts in community_posts %}
+    <div class="profile-page-post container-fluid">
+        <div class="profile-page-post-content">
+            <h3>{{posts["heading"]}}</h3> 
+            <h4><a href="{{ url_for('view.community_post', community_name=community_name, post_id=posts["post_id"]) }}">{{posts["text"]}}</a></h4>
+            <p><a href="{{ url_for('view.community_page', community_name=community_name) }}">cz/{{community_name}}</a></p>
+            <p>Posted by {{posts["user_id"]}}</p>
+            <p>{{posts["date"]}}</p>
+            <p>Number of comments</p>
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}
