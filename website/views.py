@@ -211,7 +211,7 @@ def search_communitiez():
         
     return render_template('search_communitiez.html', communitiez_list = communitiez_list)
 
-@view.route('search_communitiez/<category>', methods=["POST", "GET"])
+@view.route('/search_communitiez/<category>', methods=["POST", "GET"])
 @login_required
 def search_communitiez_category(category):
     """ This function creates the route for the
@@ -381,7 +381,27 @@ def community_post(community_name, post_id):
 
         return render_template("community_post.html", community_name=community_name, post_id=post_id, username=username, post_heading=post_heading, post_text=post_text, post_date=post_date, post_comments=post_comments)
 
-@view.route('profile')
+@view.route('my_profile')
 @login_required
-def profile():
-    return render_template('profile.html')
+def my_profile():
+
+    community_post_details = Post.query.all()
+    community_posts = []
+    for post in community_post_details:
+        user = User.query.filter_by(id=post.user_id).first()
+        if user.username == current_user.username:
+            print(user.username)
+            community_name = Community.query.filter_by(id=post.community_id).first()
+            community_name = community_name.name
+            username = User.query.filter_by(id=post.user_id).first()
+            community_post = {
+                "heading":post.heading, 
+                "text":post.text, 
+                "date":post.date, 
+                "user_id":username.username,
+                "post_id":post.id,
+                "community_name_id":community_name
+            }
+            community_posts.append(community_post)
+
+    return render_template('my_profile.html', community_posts=community_posts)
