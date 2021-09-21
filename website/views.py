@@ -384,24 +384,50 @@ def community_post(community_name, post_id):
 @view.route('my_profile')
 @login_required
 def my_profile():
+    """ This function creates the route the current_users
+    profile. The function displays the current_users
+    posts on communitiez.
+    """
 
     community_post_details = Post.query.all()
     community_posts = []
     for post in community_post_details:
         user = User.query.filter_by(id=post.user_id).first()
         if user.username == current_user.username:
-            print(user.username)
             community_name = Community.query.filter_by(id=post.community_id).first()
             community_name = community_name.name
-            username = User.query.filter_by(id=post.user_id).first()
             community_post = {
                 "heading":post.heading, 
                 "text":post.text, 
                 "date":post.date, 
-                "user_id":username.username,
+                "user_id":user.username,
                 "post_id":post.id,
                 "community_name_id":community_name
             }
             community_posts.append(community_post)
 
-    return render_template('my_profile.html', community_posts=community_posts)
+    return render_template('my_profile.html', username=current_user.username, community_posts=community_posts)
+
+@view.route('profile/<username>')
+@login_required
+def profile(username):
+
+    community_post_details = Post.query.all()
+    community_posts = []
+    for post in community_post_details:
+        user = User.query.filter_by(id=post.user_id).first()
+        if user.username == username:
+            community_name = Community.query.filter_by(id=post.community_id).first()
+            community_name = community_name.name
+            community_post = {
+                "heading":post.heading, 
+                "text":post.text, 
+                "date":post.date, 
+                "user_id":user.username,
+                "post_id":post.id,
+                "community_name_id":community_name
+            }
+            community_posts.append(community_post)
+
+    return render_template('my_profile.html', username=username, community_posts=community_posts)
+
