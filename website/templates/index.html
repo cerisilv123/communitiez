@@ -29,16 +29,14 @@
   
   <!-- Home Page Content Area -->
 
-    <div class="container-fluid home-content-area">
+    <div class="home-content-area">
         <div class="row">
-          <div class="col-lg-8">
-            <div class="home-page-cta">
-              <h1 class="heading-cta">Feel part of a community at the click of a button.</h1>
-              <h4 class="sub-heading-cta">The number one online community platform</h4>
+          <div class="col-lg-7">
+              <h1 class="heading-cta home-page-cta">Feel part of a community at the click of a button.</h1>
+              <h4 class="sub-heading-cta">The number one online community platform.</h4>
               <a href="{{ url_for('auth.signup') }}" class="btn btn-light btn-lg home-button" role="button">Sign Up</a>
-            </div>
           </div>
-          <div class="col-lg-4 robot-col">
+          <div class="col-lg-5 robot-col">
               <img class="robot-image" src="{{ url_for('static', filename='images/robot.svg') }}" alt="Image of a robot">
           </div>
         </div>

@@ -18,6 +18,14 @@ h1 {
     background-color: #30E3CA; 
 }
 
+.navbar-brand {
+    font-weight: 900;
+}
+
+.nav-item {
+    font-weight: bold;
+}
+
 .navbar-brand, .nav-item {
     padding: 6px 25px 6px 25px; 
 }
@@ -25,8 +33,14 @@ h1 {
 /* Landing Area - Home Page */
 
 .home-content-area {
-    padding-bottom: 200px;
+    background-color: #30E3CA;
+    padding: 3% 15% 7%;
+    color: white;
 } 
+
+.heading-cta {
+    font-weight: 900;
+}
 
 .robot-col {
     text-align: center;
@@ -43,10 +57,11 @@ h1 {
 
 .sub-heading-cta {
     margin: 20px 0px 20px 0px;
+    font-weight: bold;
 }
 
 .home-button {
-    margin-top: 10px;
+    margin-top: 20px;
     background-color: #30E3CA;
 }
 
@@ -55,6 +70,7 @@ h1 {
 .footer-area {
     text-align: center;
     background-color: #E4F9F5;
+    margin-top: 250px;
     padding: 30px 0px 20px 0px;
 }
 

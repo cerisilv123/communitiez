@@ -331,7 +331,8 @@ def community_page(community_name):
                 "post_id":post.id
             }
             community_posts.append(community_post)
-
+        
+        community_posts.reverse()
         return render_template("community_page.html", community_name=community_name, community_about=community_about, community_category=community_category, is_member=is_member, community_posts=community_posts)
 
 @view.route('/community_page/<community_name>/community_post/<post_id>', methods=["POST", "GET"])
@@ -405,6 +406,7 @@ def my_profile():
                 "community_name_id":community_name
             }
             community_posts.append(community_post)
+    community_posts.reverse()
 
     return render_template('my_profile.html', username=current_user.username, community_posts=community_posts)
 
@@ -428,6 +430,7 @@ def profile(username):
                 "community_name_id":community_name
             }
             community_posts.append(community_post)
+    community_posts.reverse()
 
     return render_template('my_profile.html', username=username, community_posts=community_posts)
 
